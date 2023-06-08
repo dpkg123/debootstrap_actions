@@ -31,7 +31,7 @@ jobs:
           mkdir -p -v rootfs
           sudo chmod 777 -R -v rootfs
 
-          sudo qemu-debootstrap --arch arm64 --variant=minbase --include=nano,w3m sid rootfs http://mirrors.ustc.edu.cn/debian/
+          sudo qemu-debootstrap --arch arm64 --variant=minbase --include=nano,w3m,busybox sid rootfs http://mirrors.ustc.edu.cn/debian/
           sudo chmod 777 -R -v rootfs/etc/*
           sudo chmod 777 -R -v rootfs/root
           sudo cp /etc/resolv.conf rootfs/etc -rv

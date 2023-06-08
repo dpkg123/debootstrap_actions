@@ -22,37 +22,32 @@ jobs:
 
           sudo apt update
 
-          sudo apt install -y git apt-transport-https wget qemu-user-static binfmt-support debootstrap tar zip unzip xz-utils
+          sudo apt install -y git apt-transport-https wget binfmt-support debootstrap tar zip unzip xz-utils
 
       - name: Build linux 
 
         run: |
 
           mkdir -p -v rootfs
-
           sudo chmod 777 -R -v rootfs
 
-          sudo qemu-debootstrap --arch arm64 --variant=fakechroot --include=nano,w3m sid rootfs 
-          sudo chmod 777 -R -v rootfs/root
+          sudo debootstrap --arch amd64 --variant=minbase --include=nano,w3m,busybox sid rootfs http://mirrors.ustc.edu.cn/debian/
           sudo chmod 777 -R -v rootfs/etc/*
-          sudo rm -rf rootfs/debootstrap/
-
+          sudo chmod 777 -R -v rootfs/root
           sudo cp /etc/resolv.conf rootfs/etc -rv
-
+          sudo rm -rf rootfs/debootstrap/
+          sudo echo 'debootstrap_build' > rootfs/etc/hostname
           
 
-          sudo echo 'debootstrap_build' > rootfs/etc/hostname
-
-          sudo rm -rf rootfs/usr/bin/qemu-* -v
-
       
-
       - name: Upload image to artifact
 
         uses: actions/upload-artifact@v3
 
         with:
 
-          name:  debootstrap_debian_sid_fakechroot-`(date +%Y-%m-%d)`
+          name:  debootstrap_debian_sid_minbase-`(date +%Y-%m-%d)`
 
           path: rootfs/*
+
+         
