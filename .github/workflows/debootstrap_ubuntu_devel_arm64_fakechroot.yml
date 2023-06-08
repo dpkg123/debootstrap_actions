@@ -1,0 +1,58 @@
+name: build linux
+
+on:
+
+   push:
+
+    branches: main
+
+jobs:
+
+  build-linux: 
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v3
+
+      - name: Setup environment
+
+        run: |
+
+          sudo apt update
+
+          sudo apt install -y git apt-transport-https wget qemu-user-static binfmt-support debootstrap tar zip unzip xz-utils
+
+      - name: Build linux 
+
+        run: |
+
+          mkdir -p -v rootfs
+
+          sudo chmod 777 -R -v rootfs
+
+          sudo qemu-debootstrap --arch arm64 --variant=fakechroot --include=nano,w3m sid rootfs http://mirrors.ustc.edu.cn/debian/
+
+          sudo chmod 777 -R -v rootfs/etc/*
+          sudo rm -rf rootfs/debootstrap/
+
+          sudo cp /etc/resolv.conf rootfs/etc -rv
+
+          
+
+          sudo echo 'debootstrap_build' > rootfs/etc/hostname
+
+          sudo rm -rf rootfs/usr/bin/qemu-* -v
+
+      
+
+      - name: Upload image to artifact
+
+        uses: actions/upload-artifact@v3
+
+        with:
+
+          name:  debootstrap_debian_sid_fakechroot-`(date +%Y-%m-%d)`
+
+          path: rootfs/*
