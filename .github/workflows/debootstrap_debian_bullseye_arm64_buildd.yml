@@ -21,7 +21,6 @@ jobs:
         run: |
 
           sudo apt update
-
           sudo apt install -y git apt-transport-https wget qemu-user-static binfmt-support debootstrap tar zip unzip xz-utils
       - name: Build linux 
 
@@ -38,7 +37,7 @@ jobs:
           sudo cp /etc/resolv.conf rootfs/etc -rv
 
           
-        - name: Pack linux
+      - name: Pack linux
 
         run: |
           sudo mkdir -p -v out

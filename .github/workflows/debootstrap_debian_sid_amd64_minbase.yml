@@ -21,7 +21,6 @@ jobs:
         run: |
 
           sudo apt update
-
           sudo apt install -y git apt-transport-https wget binfmt-support debootstrap tar zip unzip xz-utils
       - name: Build linux 
 
@@ -37,7 +36,7 @@ jobs:
           sudo rm -rf rootfs/debootstrap/
           sudo echo 'debootstrap_build' > rootfs/etc/hostname
           
-        - name: Build linux
+      - name: Pack linux
 
         run: |
           sudo mkdir -p -v out

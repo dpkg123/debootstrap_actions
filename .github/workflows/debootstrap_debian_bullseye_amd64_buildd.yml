@@ -41,7 +41,7 @@ jobs:
           sudo echo 'debootstrap_build' > rootfs/etc/hostname
           
           
-        - name: Pack linux
+      - name: Pack linux
 
         run: |
           sudo mkdir -p -v out 

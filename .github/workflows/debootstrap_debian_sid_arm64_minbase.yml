@@ -21,7 +21,6 @@ jobs:
         run: |
 
           sudo apt update
-
           sudo apt install -y git apt-transport-https wget qemu-user-static binfmt-support debootstrap tar zip unzip xz-utils
       - name: Build linux 
 
@@ -38,7 +37,7 @@ jobs:
           sudo echo 'debootstrap_build' > rootfs/etc/hostname
           sudo rm -rf rootfs/usr/bin/qemu-* -v
 
-        - name: Build linux
+      - name: Pack linux
 
         run: |
           sudo mkdir -p -v out
