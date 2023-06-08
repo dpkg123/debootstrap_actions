@@ -42,6 +42,13 @@ jobs:
           sudo echo 'debootstrap_build' > rootfs/etc/hostname
           
           
+        - name: Pack linux
+
+        run: |
+          sudo mkdir -p -v out 
+          cd out
+          zip -r -v rootfs.zip rootfs
+          
       - name: Upload image to artifact
 
         uses: actions/upload-artifact@v3

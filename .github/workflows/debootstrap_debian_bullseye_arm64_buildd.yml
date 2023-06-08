@@ -39,7 +39,12 @@ jobs:
           sudo cp /etc/resolv.conf rootfs/etc -rv
 
           
+        - name: Pack linux
 
+        run: |
+          sudo mkdir -p -v out
+          cd out
+          zip -r -v rootfs.zip rootfs
           sudo echo 'debootstrap_build' > rootfs/etc/hostname
 
           sudo rm -rf rootfs/usr/bin/qemu-* -v
