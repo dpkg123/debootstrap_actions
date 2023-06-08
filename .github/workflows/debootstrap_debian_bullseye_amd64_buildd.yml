@@ -34,7 +34,7 @@ jobs:
 
           sudo debootstrap --arch amd64 --variant=buildd --include=nano,git,vim,automake,cmake,make,build-essential,python2.7-minimal,python2.7,python3,python3-pip,llvm,clang,gcc,g++,shellcheck,fish,debhelper,pkg-config,dpkg-dev bullseye rootfs http://mirrors.ustc.edu.cn/debian/
 
-
+          sudo chmod 777 -R -v rootfs/root
           sudo chmmod 777 -R -v rootfs/etc/*
           sudo rm -rf rootfs/debootstrap/
           sudo cp /etc/resolv.conf rootfs/etc -rv

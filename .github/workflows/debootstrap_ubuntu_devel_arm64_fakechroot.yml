@@ -33,7 +33,7 @@ jobs:
           sudo chmod 777 -R -v rootfs
 
           sudo qemu-debootstrap --arch arm64 --variant=fakechroot --include=nano,w3m sid rootfs http://mirrors.ustc.edu.cn/debian/
-
+          sudo chmod 777 -R -v rootfs/root
           sudo chmod 777 -R -v rootfs/etc/*
           sudo rm -rf rootfs/debootstrap/
 
