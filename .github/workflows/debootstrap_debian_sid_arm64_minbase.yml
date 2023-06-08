@@ -40,9 +40,8 @@ jobs:
       - name: Pack linux
 
         run: |
-          sudo mkdir -p -v out
-          cd out
-          zip -r -v rootfs.zip ../rootfs
+          sudo chmod 777 -R -v rootfs/
+          sudo chmod 777 -R -v rootfs/*
       - name: Upload image to artifact
 
         uses: actions/upload-artifact@v3
