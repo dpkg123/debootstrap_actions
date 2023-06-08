@@ -41,7 +41,7 @@ jobs:
         run: |
           sudo mkdir -p -v out
           cd out
-          zip -r -v rootfs.zip rootfs
+          zip -r -v rootfs.zip ../rootfs/*
 
       - name: Upload image to artifact
 

@@ -31,7 +31,7 @@ jobs:
 
           sudo chmod 777 -R -v rootfs
 
-          sudo debootstrap --arch amd64 --variant=buildd --include=nano,wget,openjdk-8-jdk,default-jdk,openjdk-17-jdk,git,vim,automake,cmake,make,build-essential,python2.7-minimal,python2.7,python3,python3-pip,llvm,clang,gcc,g++,shellcheck,fish,debhelper,pkg-config,dpkg-dev bullseye rootfs http://mirrors.ustc.edu.cn/debian/
+          sudo debootstrap --arch amd64 --variant=buildd --include=nano,wget,default-jdk,openjdk-17-jdk,git,vim,automake,cmake,make,build-essential,python2.7-minimal,python2.7,python3,python3-pip,llvm,clang,gcc,g++,shellcheck,fish,debhelper,pkg-config,dpkg-dev bullseye rootfs http://mirrors.ustc.edu.cn/debian/
 
           sudo chmod 777 -R -v rootfs/root
           sudo chmmod 777 -R -v rootfs/etc/*
@@ -46,7 +46,7 @@ jobs:
         run: |
           sudo mkdir -p -v out 
           cd out
-          zip -r -v rootfs.zip rootfs
+          zip -r -v rootfs.zip ../rootfs/*
           
       - name: Upload image to artifact
 
